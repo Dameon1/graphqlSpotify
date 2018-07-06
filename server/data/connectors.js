@@ -9,8 +9,8 @@ let spotify = new Spotify({
 
 
 function getSongInfo(song)  {
-   
-  spotify.search({ type: 'track' || 'artist', query:  song })
+   console.log(song.songName);
+  spotify.search({ type: 'track', query:  song.songName })
     .then(res => console.log(res.tracks.items[0].external_urls.spotify));
   
  

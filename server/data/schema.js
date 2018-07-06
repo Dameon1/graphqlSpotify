@@ -9,8 +9,7 @@ const typeDefs = `
     song(songName: String!) : Song
     
   }
-  type Song {
-    
+  type Song {    
     artistName: Artist!
     songTitle: String
     albumTitle: String
