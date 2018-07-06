@@ -1,11 +1,14 @@
 'use strict';
-let { getSongInfo } = require('./connectors');
+let getSongInfo  = require('./connectors');
 
 const resolvers = {
 
   Query: {
+    
     song(_, args) {
-      return getSongInfo(args);
+      console.log(args);
+      getSongInfo(args);
+        
     }
   }
 };

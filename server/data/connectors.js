@@ -11,9 +11,9 @@ let spotify = new Spotify({
 function getSongInfo(song)  {
    
   spotify.search({ type: 'track' || 'artist', query:  song })
-    .then(res => console.log(res.tracks.items[0].href));
+    .then(res => console.log(res.tracks.items[0].external_urls.spotify));
   
  
 }
-getSongInfo('Stairway to Heaven');
+//getSongInfo('Stairway to Heaven');
 module.exports = getSongInfo;

@@ -6,11 +6,11 @@ let resolvers = require('./resolvers');
 
 const typeDefs = `
   type Query {
-    song(songName: String!) : Song!
+    song(songName: String!) : Song
     
   }
   type Song {
-    songName: String
+    
     artistName: Artist!
     songTitle: String
     albumTitle: String
