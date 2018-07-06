@@ -1,8 +1,8 @@
 'use strict';
 
 
-import { makeExecutableSchema } from 'graphql-tools';
-import resolvers from './resolvers'
+let { makeExecutableSchema } = require('graphql-tools');
+let resolvers = require('./resolvers');
 
 const typeDefs = `
   type Query {
@@ -21,12 +21,12 @@ const typeDefs = `
   }
   type Albums {
     albumNames: String
-    releaseDate: Number 
+    releaseDate: Int 
   }
 `;
 const schema = makeExecutableSchema({ typeDefs , resolvers});
 
-export default schema;
+module.exports = schema;
 
 
 

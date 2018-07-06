@@ -11,8 +11,7 @@ let spotify = new Spotify({
 function getSongInfo(song)  {
    
   spotify.search({ type: 'track' || 'artist', query:  song })
-    //.then(res => res.json()) 
-    .then(res => console.log(res.tracks.items[0]));
+    .then(res => console.log(res.tracks.items[0].href));
   
  
 }
