@@ -1,23 +1,25 @@
 'use strict';
 
-
 let { makeExecutableSchema } = require('graphql-tools');
 let resolvers = require('./resolvers');
 
 const typeDefs = `
   type Query {
-    song(songName: String!) : Song
-    
-  }
+    song(name:String): String
+    }
+
   type Song {    
-    artistName: Artist!
+    artistName: Artist
     songTitle: String
     albumTitle: String
-  }
+    songUrl: String
+    }
+
   type Artist {
     name: String
     albums: [Albums]
-  }
+    }
+
   type Albums {
     albumNames: String
     releaseDate: Int 

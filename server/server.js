@@ -1,38 +1,87 @@
 'use strict';
+let Spotify = require('node-spotify-api');
+let spotify = new Spotify({
+  id: '971abdb0ff9a4029ac6b44d3c3c5cdf7',
+  secret: 'a25fddc921664ef0a144c65ef8089bf0',
+});
+const {
+  ApolloServer,
+  gql
+} = require('apollo-server');
 
-const express = require('express');
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
-const bodyParser = require ('body-parser');
-const schema = require('./data/schema');
-const compression = require('compression');
-const { ApolloEngine } = require('apollo-engine');
-const cors = require('cors');
-const app = express();
+const typeDefs = gql `
+  type Query {
+    song(name:String): String
+    }
 
-app.use(cors);
-app.use(compression());
-app.use('/graphql', bodyParser.json(), graphqlExpress({
-  schema, 
-  tracing: true 
-})
-);
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+  type Song {    
+    artistName: Artist
+    songTitle: String
+    albumTitle: String
+    songUrl: String
+    }
 
-app.use('/graphql', (req,res,next) => {
-  res.json('working');
-} );
+  type Artist {
+    name: String
+    albums: [Albums]
+    }
 
+  type Albums {
+    albumNames: String
+    releaseDate: Int 
+  }
+`;
 
+const resolvers = {
 
-const GRAPHQL_PORT = 4000;
-const ENGINE_API_KEY = 'service:Dameon1:Qd4VMlHmpmhc43lhOpGdng';
+  Query: {
 
-const engine = new ApolloEngine({
-  apiKey: ENGINE_API_KEY,
+    song: (root, {
+      name
+    }, context, info) => {
+
+      return spotify.search({
+        type: 'track',
+        query: name
+      })
+        .then(res => res.tracks.items[0].external_urls.spotify);
+      //return 'Song query';
+    }
+  },
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers
 });
 
-engine.listen({
-  port: GRAPHQL_PORT,
-  graphqlPaths: ['/graphql'],
-  expressApp: app,
-});
+
+
+server.listen()
+  .then(({
+    url
+  }) => {
+    console.log(`🚀 Server ready at ${url}`);
+  });
+
+
+
+
+
+
+
+// let express = require('express');
+// let GraphQLHTTP = require('express-graphql');
+// let schema = require('./data/schema');
+
+// const app = express();
+// const PORT = 4000;
+
+// app.use('/graphql', GraphQLHTTP({
+//   schema,
+//   graphiql:true
+// })
+// );
+// app.listen(PORT, () => {
+//   console.log('Node/Express serrver for graphQL App. Listening on port: ', PORT);
+// });
