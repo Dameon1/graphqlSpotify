@@ -2,7 +2,7 @@
 
 ## Application details
 
-- This is the beginning of a graphQl client with a graphQl server
+- This is the beginning of a graphQl client with a graphQl server in one file
 -
 
 ## Where to find

@@ -3,10 +3,17 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
 
+// const GET_SONG_URL = gql`
+// query song($name: String!) {
+//   song(name: $name){
+//     artistName
+//   }
+// }
+// `;
 const GET_SONG_URL = gql`
 query song($name: String!) {
   song(name: $name){
-    artistName
+    songUrl
   }
 }
 `;
@@ -18,14 +25,17 @@ export default function SongLink (props){
               variables={ { name:props.song } }
             >
     {({ loading, error, data }) => {
+      
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
-
+        console.log(data)
       return  (
         <div >
+          {console.log('THIS_______',data.song.map(item=>item))}
           {data.song.map((item, i) => (
+            
             <div key={i}>
-              <a href={item.artistName} >{item.artistName}</a>
+              <a href={item.songUrl} target='blank'>{item.songUrl}</a>
               </div>
           ))}
          

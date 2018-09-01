@@ -7,7 +7,7 @@ import gql from 'graphql-tag'
 const GET_SONG_URL = gql`
 query song($name: String!) {
   song(name: $name){
-    artistName
+    songUrl
   }
 }
 `;
@@ -24,6 +24,7 @@ export default class Form extends React.Component {
     e.preventDefault();
     let input = this.input.value;
     console.log(input);
+    console.log(this.props);
     this.props.onSubmit(input);
    
     this.input.value="";
