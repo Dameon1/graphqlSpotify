@@ -1,8 +1,32 @@
+import ApolloClient from 'apollo-boost'
+import gql from 'graphql-tag'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import {ApolloProvider , Query } from 'react-apollo';
+import Form from './Form';
+import Display from './Display';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import './index.css';
+import SongLink from './SongLink';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+
+const client = new ApolloClient({
+  uri:"http://localhost:4000/graphql"
+})
+
+
+
+
+
+
+ 
+
+
+
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+      <App />
+  </ApolloProvider>,
+  document.getElementById('root'));
+

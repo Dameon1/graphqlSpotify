@@ -1,9 +1,17 @@
 'use strict';
+
+
+
 let Spotify = require('node-spotify-api');
+
 let spotify = new Spotify({
   id: '971abdb0ff9a4029ac6b44d3c3c5cdf7',
   secret: 'a25fddc921664ef0a144c65ef8089bf0',
 });
+
+
+
+
 const {
   ApolloServer,
   gql
@@ -11,19 +19,19 @@ const {
 
 const typeDefs = gql `
   type Query {
-    song(name:String): String
+    song(name:String): [Song]
     }
 
   type Song {    
-    artistName: Artist
+    artist: [Artist]
     songTitle: String
-    albumTitle: String
+    albumTitle: [Albums]
     songUrl: String
     }
 
   type Artist {
     name: String
-    albums: [Albums]
+    
     }
 
   type Albums {
@@ -35,17 +43,19 @@ const typeDefs = gql `
 const resolvers = {
 
   Query: {
+    song: async (root, { name }, context, info) => {
+    const results = await spotify.search( { type: 'track', query: name } )
+    
+          return results.tracks.items.map(item => ({
+            artistName:item.artists[0].name
+          }
 
-    song: (root, {
-      name
-    }, context, info) => {
+          ))
 
-      return spotify.search({
-        type: 'track',
-        query: name
-      })
-        .then(res => res.tracks.items[0].external_urls.spotify);
-      //return 'Song query';
+
+        //.then(res => res.tracks.items[0].external_urls.spotify);
+          //res.tracks.items);
+          //);
     }
   },
 };

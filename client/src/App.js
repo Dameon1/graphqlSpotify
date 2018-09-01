@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Form from './Form';
+import Display from './Display';
+import SongLink from './SongLink';
+
+
 
 class App extends Component {
+ 
+  state = {
+    songName: "This is America"
+  }
+
+  handleSongRequest(song){
+    this.setState({
+      songName:song
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <div>
+
+      <h2 className='center'>My first Apollo app</h2>
+      <Form onSubmit={ (song) => this.handleSongRequest(song) }/>
+      <Display />
+      <SongLink song={this.state.songName}/>
+    </div>
     );
   }
 }
