@@ -34,7 +34,9 @@ export default function AlbumLink (props){
               <h3>{item.name}</h3>
               { (item.albumUrl!== undefined)
                 ? <a href={item.albumUrl} target='blank'>{item.albumName}</a> 
-                : null }              
+                : null } 
+                <p>{item.releaseDate}</p>
+                <p>{item.artist}</p>             
               </div> 
             </div>
           ))}         

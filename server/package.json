@@ -10,8 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.0.0-rc.6",
-    "node-spotify-api": "^1.0.7",
-    "graphql": "^0.13.2"
+    "dotenv": "^6.0.0",
+    "graphql": "^0.13.2",
+    "node-spotify-api": "^1.0.7"
   },
   "devDependencies": {},
   "description": ""
