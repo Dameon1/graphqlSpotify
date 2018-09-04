@@ -15,6 +15,7 @@ const {
 const typeDefs = gql `
   type Query {
     song(name:String): [Song]
+    artist(name:String):[Artist]
     }
 
   type Song {    
@@ -24,10 +25,11 @@ const typeDefs = gql `
     songUrl: String
     }
 
-  # type Artist {
-  #   name: String
-    
-  #   }
+  type Artist {
+    name: String
+    image:String
+    artistUrl:String    
+    }
 
   # type Albums {
   #   albumNames: String
@@ -38,24 +40,27 @@ const typeDefs = gql `
 const resolvers = {
   Query: {
     song: async (root, { name },context, info) => {
-     
-        console.log(name);
         const results = await spotify.search( { type: 'track', query: name } )
-        
-        console.log("results:",results.tracks.items.map(item => ({
-         
-          title:item.album.name,
-        })),results.tracks.items.map(item =>item));
-       // console.log(results.tracks.items);
         return results.tracks.items.map(item => ({
           image:item.album.images[1].url,
           artist:item.album.artists[0].name,
           title:item.name,
           songUrl:item.external_urls.spotify
           //songUrl:results.tracks.items[0].external_urls.spotify
-        }))
-      
-    }
+        }))      
+    },
+    artist: async (root, { name },context, info) => {
+      console.log(name,'------------------------------------');
+      const results = await spotify.search( { type: 'artist', query: name } )
+      console.log(results.artists.items.map(item => item));
+      return results.artists.items.map(item => ({
+       image:(item.images.length>0)?item.images[1].url:null,
+       name:item.name,
+      //   title:item.name,
+      artistUrl:item.external_urls.spotify
+      //   //songUrl:results.tracks.items[0].external_urls.spotify
+     }))      
+  }
   },
   // Query: {
   //   song: async (root, { name }, context, info) => {

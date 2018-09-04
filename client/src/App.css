@@ -21,6 +21,12 @@
 .App-intro {
   font-size: large;
 }
+.topForms {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+
+ }
 .songBox {
   border:2px solid black;
   display:flex;
