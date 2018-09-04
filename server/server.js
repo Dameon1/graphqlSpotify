@@ -19,8 +19,8 @@ const typeDefs = gql `
 
   type Song {    
     artist: String
-    songTitle: String
-    albumTitle: String
+    title: String
+    image: String
     songUrl: String
     }
 
@@ -42,10 +42,17 @@ const resolvers = {
         console.log(name);
         const results = await spotify.search( { type: 'track', query: name } )
         
-        console.log(results);
-      
+        console.log("results:",results.tracks.items.map(item => ({
+         
+          title:item.album.name,
+        })),results.tracks.items.map(item =>item));
+       // console.log(results.tracks.items);
         return results.tracks.items.map(item => ({
-          songUrl:results.tracks.items[0].external_urls.spotify
+          image:item.album.images[1].url,
+          artist:item.album.artists[0].name,
+          title:item.name,
+          songUrl:item.external_urls.spotify
+          //songUrl:results.tracks.items[0].external_urls.spotify
         }))
       
     }

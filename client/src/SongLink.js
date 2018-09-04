@@ -14,6 +14,9 @@ const GET_SONG_URL = gql`
 query song($name: String!) {
   song(name: $name){
     songUrl
+    title
+    artist
+    image
   }
 }
 `;
@@ -34,9 +37,13 @@ export default function SongLink (props){
           {console.log('THIS_______',data.song.map(item=>item))}
           {data.song.map((item, i) => (
             
-            <div key={i}>
-              <a href={item.songUrl} target='blank'>{item.songUrl}</a>
+            <div key={i} className="songBox">
+              <img src={item.image} alt='fix'/>
+              <div>
+              <h3>{item.artist}</h3>
+              <a href={item.songUrl} target='blank'>{item.title}</a>
               </div>
+            </div>
           ))}
          
         </div>

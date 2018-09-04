@@ -3,9 +3,6 @@ import React from 'react';
 import './display.css';
 
 
-
-
-
 export default class Display extends React.Component {
 
 render(){

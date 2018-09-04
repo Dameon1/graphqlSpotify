@@ -5,15 +5,13 @@ import Form from './Form';
 import Display from './Display';
 import SongLink from './SongLink';
 
-
-
 class App extends Component {
  
-  state = {
-    songName: "This is America"
-  }
+state = {
+  songName: "This is America"
+}
 
-  handleSongRequest(song){
+handleSongRequest(song){
     this.setState({
       songName:song
     })

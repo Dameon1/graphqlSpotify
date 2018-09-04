@@ -40,11 +40,23 @@ export default class Form extends React.Component {
           if (loading) return <p>Loading...</p>;
           //if (error) return <p>Error :(</p>;
             return (
+              <div>
               <form onSubmit={ (e) => this.handleFormSubmit(e)} className="sampleForm">
-                <label className="formElementSpacing"> Something here </label><br/>
+                <label className="formElementSpacing"> Song Search </label><br/>
                 <input type='text'  ref={ input => (this.input = input) } className='formElementSpacing'></input><br/>
                 <button type='submit' className='formElementSpacing'>Click Me</button>
               </form>
+             {/* <form onSubmit={ (e) => this.handleFormSubmit(e)} className="sampleForm">
+                 <label className="formElementSpacing"> Album Search </label><br/>
+                <input type='text'  ref={ input => (this.input = input) } className='formElementSpacing'></input><br/>
+                <button type='submit' className='formElementSpacing'>Click Me</button>
+              </form>
+              <form onSubmit={ (e) => this.handleFormSubmit(e)} className="sampleForm">
+                <label className="formElementSpacing"> Artist Search </label><br/>
+                <input type='text'  ref={ input => (this.input = input) } className='formElementSpacing'></input><br/>
+                <button type='submit' className='formElementSpacing'>Click Me</button>
+              </form> */}
+            </div>
             )
           }}
         </Query>
