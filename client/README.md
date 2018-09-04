@@ -23,7 +23,7 @@
 ## Contributions
 
 Contributions to the application are accepted. If you have a design suggestion, feel free to
-change and make a pull request. I styled this app with the simplest of styles.
+change and make a pull request. 
 
 ## Built With
 //todo add apollo,node,express

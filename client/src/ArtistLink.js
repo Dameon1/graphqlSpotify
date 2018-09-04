@@ -22,34 +22,23 @@ export default function AritstLink (props){
       if (error) return <p>Error :(</p>;
         console.log(data)
       return  (
-        <div >
-          {console.log('THIS_______',data.artist.map(item=>item))}
+        <div>          
           {data.artist.map((item, i) => (
-            
             <div key={i} className="songBox">
-            {(item.image !== undefined) ? <img src={item.image} alt='fix'style={{width:'200px',height:'200px'}}/>:null}
-       
+            { (item.image !== undefined) 
+              ? <img src={item.image} alt='fix'style={{width:'200px',height:'200px'}}/> 
+              : null }       
               <div>
-              <h3>{item.name}</h3>
-              {(item.artistUrl!== undefined)? <a href={item.artistUrl} target='blank'>{item.name}</a> : null}
-              
+                <h3>{item.name}</h3>
+                { (item.artistUrl!== undefined)
+                  ? <a href={item.artistUrl} target='blank'>{item.name}</a> 
+                  : null }              
               </div> 
-            </div>
-          ))}
-         
+            </div> ))
+          }         
         </div>
       );
     }}
   </Query>
   )
 };
-
-
-
-// const GET_SONG_URL = gql`
-// query song($name: String!) {
-//   song(name: $name){
-//     artistName
-//   }
-// }
-// `;

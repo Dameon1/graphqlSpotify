@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Form from './Form';
 import Display from './Display';
@@ -41,19 +40,17 @@ handleSongRequest(song){
   render() {
     return (
       <div>
-
-      <h2 className='center'>My first Apollo app</h2>
-      <div  className="topForms">
-      <Form onSubmit={ (song) => this.handleSongRequest(song) }/>
-      <ArtistForm  onSubmit={ (artist) => this.handleArtistRequest(artist) }/>
-      <AlbumForm  onSubmit={ (album) => this.handleAlbumRequest(album) }/>
+        <h2 className='center'>My first Apollo app</h2>
+        <div  className="topForms">
+          <Form onSubmit={ (song) => this.handleSongRequest(song) }/>
+          <ArtistForm  onSubmit={ (artist) => this.handleArtistRequest(artist) }/>
+          <AlbumForm  onSubmit={ (album) => this.handleAlbumRequest(album) }/>
+        </div>
+        <Display />
+        { (this.state.songName) ? <SongLink song={this.state.songName}/> : 
+          (this.state.artistName) ? <ArtistLink artist={this.state.artistName}/> :
+          (this.state.albumName) ? <AlbumLink album={this.state.albumName}/> : null}
       </div>
-      <Display />
-      {(this.state.songName) ? <SongLink song={this.state.songName}/> : 
-      (this.state.artistName) ? <ArtistLink artist={this.state.artistName}/> :
-      (this.state.albumName) ? <AlbumLink album={this.state.albumName}/> : null}
-      
-    </div>
     );
   }
 }

@@ -25,33 +25,22 @@ export default function AlbumLink (props){
         console.log(data)
       return  (
         <div >
-          {console.log('THAT_______',data)}
           {data.albums.map((item, i) => (
-            
             <div key={i} className="songBox">
-            {(item.albumImage !== undefined) ? <img src={item.albumImage} alt='fix'style={{width:'200px',height:'200px'}}/>:null}
-       
+              { (item.albumImage !== undefined) 
+                ? <img src={item.albumImage} alt='fix'style={{width:'200px',height:'200px'}}/>
+                : null }       
               <div>
               <h3>{item.name}</h3>
-              {(item.albumUrl!== undefined)? <a href={item.albumUrl} target='blank'>{item.albumName}</a> : null}
-              
+              { (item.albumUrl!== undefined)
+                ? <a href={item.albumUrl} target='blank'>{item.albumName}</a> 
+                : null }              
               </div> 
             </div>
-          ))}
-         
+          ))}         
         </div>
       );
     }}
   </Query>
   )
 };
-
-
-
-// const GET_SONG_URL = gql`
-// query song($name: String!) {
-//   song(name: $name){
-//     artistName
-//   }
-// }
-// `;

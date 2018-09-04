@@ -17,16 +17,12 @@ export default function SongLink (props){
               query={GET_SONG_URL}
               variables={ { name:props.song } }
             >
-    {({ loading, error, data }) => {
-      
+    {({ loading, error, data }) => {      
       if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
-        console.log(data)
+      if (error) return <p>Error :(</p>;        
       return  (
-        <div >
-          {console.log('THIS_______',data.song.map(item=>item))}
+        <div>
           {data.song.map((item, i) => (
-            
             <div key={i} className="songBox">
               <img src={item.image} alt='fix'/>
               <div>
@@ -34,8 +30,7 @@ export default function SongLink (props){
               <a href={item.songUrl} target='blank'>{item.title}</a>
               </div>
             </div>
-          ))}
-         
+          ))}         
         </div>
       );
     }}
