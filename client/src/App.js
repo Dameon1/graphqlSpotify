@@ -6,6 +6,8 @@ import Display from './Display';
 import SongLink from './SongLink';
 import Artist from './Artist'
 import ArtistLink from './ArtistLink'
+import Album from './Album'
+import AlbumLink from './AlbumLink';
 class App extends Component {
  
 state = {
@@ -43,11 +45,13 @@ handleSongRequest(song){
       <h2 className='center'>My first Apollo app</h2>
       <div  className="topForms">
       <Form onSubmit={ (song) => this.handleSongRequest(song) }/>
-      <Artist  onSubmit={ (song) => this.handleArtistRequest(song) }/>
+      <Artist  onSubmit={ (artist) => this.handleArtistRequest(artist) }/>
+      <Album  onSubmit={ (album) => this.handleArtistRequest(album) }/>
       </div>
       <Display />
       {(this.state.songName) ? <SongLink song={this.state.songName}/> : 
-      (this.state.artistName) ? <ArtistLink artist={this.state.artistName}/> : null}
+      (this.state.artistName) ? <ArtistLink artist={this.state.artistName}/> :
+      (this.state.albumName) ? <AlbumLink artist={this.state.albumName}/> : null}
       
     </div>
     );
