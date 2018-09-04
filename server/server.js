@@ -16,6 +16,7 @@ const typeDefs = gql `
   type Query {
     song(name:String): [Song]
     artist(name:String):[Artist]
+    albums(name:String):[Albums]
     }
 
   type Song {    
@@ -31,10 +32,14 @@ const typeDefs = gql `
     artistUrl:String    
     }
 
-  # type Albums {
-  #   albumNames: String
-  #   releaseDate: Int 
-  # }
+  type Albums {
+    albumName: String
+    releaseDate: Int
+    artist:String
+    albumUrl:String
+    albumImage:String
+    
+  }
 `;
 
 const resolvers = {
@@ -56,11 +61,27 @@ const resolvers = {
       return results.artists.items.map(item => ({
        image:(item.images.length>0)?item.images[1].url:null,
        name:item.name,
-      //   title:item.name,
-      artistUrl:item.external_urls.spotify
-      //   //songUrl:results.tracks.items[0].external_urls.spotify
+       artistUrl:item.external_urls.spotify     
      }))      
-  }
+    },
+    albums: async (root, { name },context, info) => {
+      console.log(name,'------------------------------------');
+      const results = await spotify.search( { type: 'album', query: name } )
+      console.log('album results:',results.albums.items[0]);
+      return results.albums.items.map(item => ({
+        albumName:item.name,
+        releaseDate:parseInt(item.release_date),
+         artist:item.artists[0].name,
+        albumUrl:item.external_urls.spotify,
+       albumImage:(item.images.length>0)?item.images[1].url:null,
+       
+      }))
+    //   return results.artists.items.map(item => ({
+    //    image:(item.images.length>0)?item.images[1].url:null,
+    //    name:item.name,
+    //    artistUrl:item.external_urls.spotify     
+    //  }))      
+    },
   },
   // Query: {
   //   song: async (root, { name }, context, info) => {

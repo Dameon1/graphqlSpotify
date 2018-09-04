@@ -2,19 +2,21 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
-const GET_ARTIST_URL = gql`
-  query song($name: String!) {
-    artist(name: $name){
-      name
-      artistUrl
-      image
+const GET_ALBUM_URL = gql`
+  query albums($name: String!) {
+    albums(name: $name){
+      albumName
+      releaseDate
+      artist
+      albumUrl
+      albumImage     
     }
 }`;
 
-export default function AritstLink (props){ 
+export default function AlbumLink (props){ 
   return ( <Query    
-              query={GET_ARTIST_URL}
-              variables={ { name:props.artist } }
+              query={GET_ALBUM_URL}
+              variables={ { name:props.album } }
             >
     {({ loading, error, data }) => {
       
@@ -23,15 +25,15 @@ export default function AritstLink (props){
         console.log(data)
       return  (
         <div >
-          {console.log('THIS_______',data.artist.map(item=>item))}
-          {data.artist.map((item, i) => (
+          {console.log('THAT_______',data)}
+          {data.albums.map((item, i) => (
             
             <div key={i} className="songBox">
-            {(item.image !== undefined) ? <img src={item.image} alt='fix'style={{width:'200px',height:'200px'}}/>:null}
+            {(item.albumImage !== undefined) ? <img src={item.albumImage} alt='fix'style={{width:'200px',height:'200px'}}/>:null}
        
               <div>
               <h3>{item.name}</h3>
-              {(item.artistUrl!== undefined)? <a href={item.artistUrl} target='blank'>{item.name}</a> : null}
+              {(item.albumUrl!== undefined)? <a href={item.albumUrl} target='blank'>{item.albumName}</a> : null}
               
               </div> 
             </div>
